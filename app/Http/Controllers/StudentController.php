@@ -38,4 +38,9 @@ class StudentController extends Controller
         return response()->json($student);
 
     }
+    public function deleteStudent($id){
+        $student = Student::find($id);
+        $student->delete();
+        return response()->json(['success' => 'Record has been deleted']);
+    }
 }

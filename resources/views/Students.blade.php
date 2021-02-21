@@ -46,6 +46,7 @@
                                     <td>{{ $s->phone }}</td>
                                     <td>
                                         <a href="javascript:void(0)" onclick="editStudent({{ $s->id }})" class="btn btn-warning">Edit</a>
+                                        <a href="javascript:void(0)" onclick="deleteStudent({{ $s->id }})" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -190,6 +191,22 @@ $("#studentForm").submit(function(e){
         }
     });
 });
+</script>
+<script>
+    function deleteStudent(id){
+        if (confirm("Do you want really to delete this data ?")) {
+            $.ajax({
+                url: "/students/"+id,
+                type: "delete",
+                data: {
+                    _token : $("input[name=_token]").val()
+                },
+                success: function(response){
+                    $("#sid"+id).remove();
+                }
+            });
+        }
+    }
 </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
